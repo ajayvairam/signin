@@ -1,39 +1,30 @@
-.login-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  form div {
-    margin-bottom: 15px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007aff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #005bb5;
-  }
-  
+/* Common Button Styling for Blue Buttons */
+button {
+  padding: 12px;
+  border-radius: 6px;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+  color: white;
+  border: none;
+}
+
+/* Blue Button Styling for Login and Register */
+.blue-button {
+  background-color: #1976d2;  /* Blue color */
+}
+
+.blue-button:hover {
+  background-color: #0d47a1;  /* Darker blue on hover */
+}
+
+/* Toggle Button Styling */
+.toggle-button {
+  background: none;
+  color: #1976d2;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 20px;
+}

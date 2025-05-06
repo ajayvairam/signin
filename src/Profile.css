@@ -1,0 +1,36 @@
+.profile-icon {
+    position: relative;
+  }
+  
+  .profile-popup {
+    position: absolute;
+    top: 50px; /* Adjust if needed */
+    right: 0;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    min-width: 200px;
+  }
+  
+  .profile-popup p {
+    margin: 5px 0;
+  }
+  
+  button {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0d47a1;
+  }
+  

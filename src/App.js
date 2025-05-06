@@ -1,19 +1,23 @@
 import React, { useState } from "react";
-import Login from "./Login";
-import Register from "./Register";
-import usersData from "./users.json";
-import "./App.css";
+import Login from './Login';
+import Register from './Register';
+import Profile from './Profile'; // Assuming you have this component for profile display
+import Dashboard from './Dashboard'; // Assuming you have a dashboard component
+import usersJSON from './users.json'; // A sample JSON file containing user data
+import './App.css';
 
 function App() {
-  const [users, setUsers] = useState(usersData);
+  const [users, setUsers] = useState(usersJSON);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isRegistering, setIsRegistering] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = (username, password) => {
-    const user = users.find((u) => u.username === username && u.password === password);
+    const user = users.find(u => u.username === username && u.password === password);
     if (user) {
       setIsLoggedIn(true);
+      setLoggedInUser(user);
       setErrorMessage("");
     } else {
       setErrorMessage("Invalid username or password");
@@ -21,36 +25,41 @@ function App() {
   };
 
   const handleRegister = (newUser) => {
-    const exists = users.some((u) => u.username === newUser.username);
-    if (exists) {
-      setErrorMessage("Username already exists!");
-    } else {
-      setUsers([...users, newUser]); // only frontend memory, not file
-      setIsRegistering(false);
-      setErrorMessage("");
-      alert("Registered successfully! You can now login.");
-    }
+    setUsers([...users, newUser]);
+    setShowRegister(false);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setLoggedInUser(null);
+  };
+
+  const toggleForm = () => {
+    setShowRegister(!showRegister);
+    setErrorMessage(""); // Clear error message on form switch
   };
 
   return (
     <div className="App">
       {isLoggedIn ? (
-        <div className="login-container">
-          <h2>Welcome to VDart!</h2>
-        </div>
-      ) : isRegistering ? (
-        <div className="login-container">
-          <h2>Register</h2>
-          <Register onRegister={handleRegister} />
-          <button onClick={() => setIsRegistering(false)}>Back to Login</button>
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
-        </div>
+        <>
+          <div className="navbar">
+            <h2>Welcome Back!</h2>
+            <Profile user={loggedInUser} onLogout={handleLogout} />
+          </div>
+          <Dashboard />
+        </>
       ) : (
-        <div className="login-container">
-          <h2>Login</h2>
-          <Login onLogin={handleLogin} />
-          <button onClick={() => setIsRegistering(true)}>Create an Account</button>
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
+        <div className="login-page">
+          <div className="login-container">
+            <h2>{showRegister ? "Register" : "Login"}</h2>
+            {showRegister ? (
+              <Register onRegister={handleRegister} toggleForm={toggleForm} />
+            ) : (
+              <Login onLogin={handleLogin} toggleForm={toggleForm} />
+            )}
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
+          </div>
         </div>
       )}
     </div>
